@@ -11,18 +11,19 @@ const links = [
 export function Navbar() {
   return (
     <header className="site-header">
-      <nav className="container nav" aria-label="Navegacion principal">
+      <nav className="container nav" aria-label="Navegación principal">
         <div className="nav-links">
           {links.map((link) => (
             <Link href={link.href} key={link.href} className="nav-link">
-              <span>{link.label}</span>
               <Image
                 src={link.icon}
                 alt=""
-                width={20}
-                height={20}
+                width={18}
+                height={18}
                 aria-hidden="true"
+                className="nav-icon"
               />
+              <span>{link.label}</span>
             </Link>
           ))}
         </div>
