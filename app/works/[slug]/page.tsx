@@ -27,6 +27,11 @@ export default async function WorkDetailPage({
           <div className="meta-row">
             <span>{project.period}</span>
             <span>{project.duration}</span>
+            {project.repository ? (
+              <a href={project.repository} target="_blank" rel="noopener noreferrer">
+                Ver repositorio
+              </a>
+            ) : null}
           </div>
         </div>
       </section>

@@ -9,27 +9,27 @@ export default function Home() {
       <section className="section hero">
         <div className="container hero-grid editorial">
           <div className="stack hero-copy">
-            <p className="eyebrow">Designer / Developer</p>
-            <h1>Interfaces digitales con estructura, ritmo visual y ejecucion tecnica.</h1>
+            <p className="eyebrow">Ingenieria de Sistemas / Desarrollo web / Soporte TI</p>
+            <h1>Brayan Alexandro Cahuana Utani.</h1>
             <p className="lead">
-              Portfolio construido con Next.js y Once UI para presentar trabajos,
-              procesos y resultados en una experiencia sobria, responsiva y facil de
-              recorrer.
+              Estudiante de Ingenieria de Sistemas en la UCSM, con experiencia en
+              soporte tecnico, administracion de equipos de TI y desarrollo web con
+              Java, Python, PHP, JavaScript y React.
             </p>
             <div className="actions">
               <Link className="button primary" href="/works">
-                Work
+                Proyectos
               </Link>
               <Link className="button secondary" href="/about">
-                About
+                Sobre mi
               </Link>
             </div>
           </div>
           <div className="portrait-panel" aria-label="Identidad visual del portfolio">
             <div className="portrait-orbit">
-              <span>UI</span>
-              <span>UX</span>
-              <span>CODE</span>
+              <span>TI</span>
+              <span>WEB</span>
+              <span>REDES</span>
             </div>
           </div>
         </div>
@@ -38,21 +38,21 @@ export default function Home() {
       <section className="section intro-band">
         <div className="container split">
           <div>
-            <p className="eyebrow">Overview</p>
-            <h2>Una base limpia para contar quien eres, que haces y que has construido.</h2>
+            <p className="eyebrow">Perfil</p>
+            <h2>Formacion tecnica, soporte a usuarios y desarrollo de software.</h2>
           </div>
           <div className="hero-panel" aria-label="Resumen del portfolio">
             <div>
-              <span className="metric">3</span>
-              <p>paginas principales en la navegacion</p>
+              <span className="metric">9no</span>
+              <p>ciclo de Ingenieria de Sistemas en la Universidad Catolica de Santa Maria</p>
             </div>
             <div>
-              <span className="metric">{projects.length}</span>
-              <p>casos cargados desde datos editables</p>
+              <span className="metric">10</span>
+              <p>repositorios publicos en GitHub con practicas y proyectos academicos</p>
             </div>
             <div>
-              <span className="metric">SSG</span>
-              <p>paginas individuales generadas por slug</p>
+              <span className="metric">TI</span>
+              <p>experiencia en soporte, mantenimiento, inventario y configuracion de equipos</p>
             </div>
           </div>
         </div>
@@ -61,8 +61,8 @@ export default function Home() {
       <section className="section muted">
         <div className="container">
           <div className="section-heading">
-            <p className="eyebrow">Selected work</p>
-            <h2>Trabajos destacados</h2>
+            <p className="eyebrow">GitHub</p>
+            <h2>Proyectos destacados</h2>
           </div>
           <div className="work-grid">
             {featured.map((project) => (

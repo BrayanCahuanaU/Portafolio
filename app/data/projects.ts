@@ -6,6 +6,7 @@ export type Project = {
   description: string;
   period: string;
   duration: string;
+  repository?: string;
   technologies: string[];
   outcomes: string[];
   results: {
@@ -18,112 +19,116 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: "portfolio-once-ui",
-    title: "Portfolio personal",
-    category: "Web",
-    summary: "Sitio profesional para presentar perfil, trabajos y casos individuales.",
+    slug: "vint",
+    title: "VINT",
+    category: "Startup web",
+    summary: "Proyecto web tipo startup construido con HTML, CSS y PHP.",
     description:
-      "Portfolio construido con Next.js y Once UI como base visual, preparado para crecer con nuevos trabajos sin rehacer la navegacion.",
-    period: "Enero 2026 - Junio 2026",
-    duration: "5 meses desde inicio hasta ultimo commit",
-    technologies: ["Next.js", "React", "TypeScript", "Once UI", "Tailwind CSS"],
+      "Repositorio orientado a una propuesta startup llamada VINT, desarrollado con herramientas web base y PHP para estructurar una experiencia funcional.",
+    period: "Proyecto academico",
+    duration: "Desarrollo web con enfoque practico",
+    repository: "https://github.com/BrayanCahuanaU/VINT",
+    technologies: ["HTML", "CSS", "PHP", "Git", "GitHub"],
     outcomes: [
-      "Navegacion principal con Home, Acerca de mi y Trabajos.",
-      "Paginas individuales generadas desde datos estructurados.",
-      "Secciones por dispositivo con scroll responsivo.",
+      "Construccion de paginas web con estructura HTML y estilos CSS.",
+      "Uso de PHP para organizar logica de una aplicacion web inicial.",
+      "Versionado publico del codigo en GitHub.",
     ],
     results: [
       {
         device: "Escritorio",
-        title: "Vista amplia para lectura y comparacion",
+        title: "Presentacion amplia del producto",
         detail:
-          "La informacion principal mantiene jerarquia clara y usa columnas para aprovechar pantallas grandes.",
+          "La interfaz permite mostrar secciones principales del proyecto con jerarquia clara para navegacion en pantalla grande.",
         kind: "desktop",
       },
       {
         device: "Tablet",
-        title: "Bloques compactos sin perder contexto",
+        title: "Lectura por modulos",
         detail:
-          "Las secciones reducen ancho y conservan el flujo visual para navegacion tactil.",
+          "El contenido se organiza en bloques faciles de recorrer desde dispositivos intermedios.",
         kind: "tablet",
       },
       {
         device: "Movil",
-        title: "Contenido vertical y facil de escanear",
+        title: "Flujo vertical",
         detail:
-          "Cada bloque se apila para evitar solapamientos y mantener botones faciles de tocar.",
+          "La experiencia prioriza contenido apilado y lectura rapida desde telefonos.",
         kind: "mobile",
       },
     ],
   },
   {
-    slug: "dashboard-operativo",
-    title: "Dashboard operativo",
-    category: "Aplicacion web",
-    summary: "Panel para revisar metricas, estados y acciones frecuentes en una sola vista.",
+    slug: "fsi",
+    title: "FSI",
+    category: "Seguridad informatica",
+    summary: "Repositorio de practicas y laboratorios de fundamentos de seguridad informatica.",
     description:
-      "Interfaz tipo SaaS pensada para consulta diaria, con tarjetas de estado, listas accionables y estructura densa pero legible.",
-    period: "Marzo 2025 - Mayo 2025",
-    duration: "2 meses desde prototipo hasta entrega",
-    technologies: ["React", "TypeScript", "CSS Modules", "REST API"],
+      "Coleccion de actividades, ejercicios y laboratorios de seguridad informatica con material web y documentacion academica.",
+    period: "Proyecto academico",
+    duration: "Practicas y laboratorios por entregas",
+    repository: "https://github.com/BrayanCahuanaU/FSI",
+    technologies: ["PHP", "HTML", "CSS", "Documentacion tecnica", "GitHub"],
     outcomes: [
-      "Resumen de indicadores clave en primera pantalla.",
-      "Patrones visuales consistentes para estados y prioridades.",
-      "Responsive adaptado a equipos de escritorio y revision movil.",
+      "Organizacion de ejercicios y laboratorios por carpetas.",
+      "Aplicacion de conceptos de seguridad en ejemplos web.",
+      "Documentacion de practicas y evidencias del aprendizaje.",
     ],
     results: [
       {
         device: "Escritorio",
-        title: "Panel principal de alta densidad",
-        detail: "Metricas, tablas y acciones permanecen visibles sin saturar el layout.",
+        title: "Revision de laboratorios",
+        detail:
+          "Los archivos y ejercicios se pueden explorar con contexto completo desde una pantalla amplia.",
         kind: "desktop",
       },
       {
         device: "Tablet",
-        title: "Gestion intermedia",
-        detail: "Los modulos se redistribuyen para mantener lectura horizontal controlada.",
+        title: "Consulta academica",
+        detail: "La estructura del repositorio permite revisar material y avances por actividades.",
         kind: "tablet",
       },
       {
         device: "Movil",
-        title: "Revision rapida",
-        detail: "La informacion se prioriza en tarjetas verticales con acciones claras.",
+        title: "Acceso rapido",
+        detail: "Los contenidos principales quedan disponibles para revision puntual desde GitHub.",
         kind: "mobile",
       },
     ],
   },
   {
-    slug: "landing-producto",
-    title: "Landing de producto",
-    category: "Marketing web",
-    summary: "Pagina de conversion con propuesta clara, beneficios y llamados a la accion.",
+    slug: "lp-ii",
+    title: "LP-II",
+    category: "Programacion en Java",
+    summary: "Repositorio de Lenguaje de Programacion II con ejercicios desarrollados en Java.",
     description:
-      "Landing responsive orientada a comunicar valor rapidamente y guiar al usuario hacia una accion principal.",
-    period: "Agosto 2025 - Septiembre 2025",
-    duration: "4 semanas de iteracion",
-    technologies: ["Next.js", "React", "Tailwind CSS", "Vercel"],
+      "Practicas de programacion orientadas al dominio de Java, control de versiones y resolucion de ejercicios academicos.",
+    period: "Proyecto academico",
+    duration: "Ejercicios por laboratorio",
+    repository: "https://github.com/BrayanCahuanaU/LP-II",
+    technologies: ["Java", "Programacion orientada a objetos", "Git", "GitHub"],
     outcomes: [
-      "Mensaje principal visible en el primer viewport.",
-      "Secciones claras para beneficios, prueba social y contacto.",
-      "Carga rapida y estructura preparada para SEO.",
+      "Resolucion de ejercicios de programacion en Java.",
+      "Practica constante de estructuras, clases y logica aplicada.",
+      "Repositorio publico para seguimiento del aprendizaje.",
     ],
     results: [
       {
         device: "Escritorio",
-        title: "Presentacion comercial completa",
-        detail: "La propuesta de valor y el CTA se muestran con espacio para explorar detalles.",
+        title: "Lectura de codigo",
+        detail: "La vista amplia facilita analizar archivos, commits y estructura de ejercicios.",
         kind: "desktop",
       },
       {
         device: "Tablet",
-        title: "Lectura fluida",
-        detail: "Los bloques se acomodan para mantener ritmo sin columnas demasiado estrechas.",
+        title: "Seguimiento de practicas",
+        detail: "Los laboratorios se pueden revisar de forma ordenada durante el aprendizaje.",
         kind: "tablet",
       },
       {
         device: "Movil",
-        title: "Conversion directa",
-        detail: "El contenido prioriza CTA, beneficios y contacto en un flujo corto.",
+        title: "Consulta rapida",
+        detail: "El repositorio permite ubicar ejercicios especificos desde dispositivos moviles.",
         kind: "mobile",
       },
     ],

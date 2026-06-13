@@ -4,32 +4,22 @@ import Image from "next/image";
 const socialLinks = [
   {
     name: "GitHub",
-    href: "https://github.com/TU_USUARIO",
+    href: "https://github.com/BrayanCahuanaU",
     icon: "/social-media/github.svg",
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/in/TU_USUARIO",
+    href: "https://www.linkedin.com/in/brayan-alexandro-cahuana-utani",
     icon: "/social-media/linkedin.svg",
   },
   {
     name: "WhatsApp",
-    href: "https://wa.me/51999999999",
+    href: "https://wa.me/51997767502",
     icon: "/social-media/whatsapp.svg",
   },
   {
-    name: "Telegram",
-    href: "https://t.me/TU_USUARIO",
-    icon: "/social-media/telegram.svg",
-  },
-  {
-    name: "Facebook",
-    href: "https://facebook.com/TU_USUARIO",
-    icon: "/social-media/facebook.svg",
-  },
-  {
     name: "Gmail",
-    href: "mailto:tucorreo@gmail.com",
+    href: "mailto:cahuanabrayan123@gmail.com",
     icon: "/social-media/gmail.svg",
   },
 ];
@@ -39,8 +29,8 @@ export function Footer() {
     <footer className="site-footer">
       <div className="container footer-inner">
         <div className="footer-left">
-          <span>© 2026 Brayan Cahuana</span>
-          <span>Systems Engineer & Software Developer</span>
+          <span>2026 Brayan Cahuana</span>
+          <span>Ingenieria de Sistemas / Software / Soporte TI</span>
         </div>
 
         <div className="footer-socials">
@@ -53,12 +43,7 @@ export function Footer() {
               className="footer-social-link"
               aria-label={social.name}
             >
-              <Image
-                src={social.icon}
-                alt={social.name}
-                width={18}
-                height={18}
-              />
+              <Image src={social.icon} alt={social.name} width={18} height={18} />
             </Link>
           ))}
         </div>

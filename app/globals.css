@@ -169,7 +169,8 @@ h3 {
 
 .button,
 .tag,
-.meta-row span {
+.meta-row span,
+.meta-row a {
   border-radius: 999px;
   display: inline-flex;
   font-weight: 700;
@@ -188,18 +189,21 @@ h3 {
 
 .button.secondary,
 .tag,
-.meta-row span {
+.meta-row span,
+.meta-row a {
   background: color-mix(in srgb, var(--surface) 86%, transparent);
   border: 1px solid var(--border);
 }
 
 .button.secondary,
-.tag {
+.tag,
+.meta-row a {
   color: var(--foreground);
 }
 
 .meta-row span,
-.tag {
+.tag,
+.meta-row a {
   padding: 9px 12px;
 }
 

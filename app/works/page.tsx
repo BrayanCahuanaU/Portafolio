@@ -6,12 +6,12 @@ export default function WorksPage() {
     <main>
       <section className="section hero compact">
         <div className="container stack">
-          <p className="eyebrow">Work</p>
-          <h1>Casos seleccionados con resultados por plataforma.</h1>
+          <p className="eyebrow">Proyectos</p>
+          <h1>Repositorios y practicas que muestran mi avance tecnico.</h1>
           <p className="lead">
-            Una coleccion de proyectos presentados como puertas de entrada a una
-            pagina individual con contexto, tecnologias, resultados y previews por
-            dispositivo.
+            Seleccion de proyectos publicados en GitHub, con enfasis en desarrollo
+            web, programacion academica, seguridad informatica y uso de control de
+            versiones.
           </p>
         </div>
       </section>
