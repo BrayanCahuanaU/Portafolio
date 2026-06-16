@@ -1,17 +1,16 @@
 import Link from "next/link";
-import { projects } from "../data/projects";
+import { getProjects } from "../data/projects";
 
-export default function WorksPage() {
+export default async function WorksPage() {
+  const projects = await getProjects();
   return (
     <main>
       <section className="section hero compact">
         <div className="container stack">
           <p className="eyebrow">Proyectos</p>
-          <h1>Repositorios y practicas que muestran mi avance tecnico.</h1>
+          <h1>Repositorios y practicas que puedes visualizar.</h1>
           <p className="lead">
-            Seleccion de proyectos publicados en GitHub, con enfasis en desarrollo
-            web, programacion academica, seguridad informatica y uso de control de
-            versiones.
+            Puedes ingresar a cada proyecto para ver más detalles y el código fuente.
           </p>
         </div>
       </section>

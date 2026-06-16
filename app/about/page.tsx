@@ -37,13 +37,51 @@ const timeline = [
 ];
 
 const certifications = [
-  "AWS Academy Cloud Foundations",
-  "IBM COBOL Programming with VSCode",
-  "Cisco CCNA: Introduction to Networks",
-  "Cisco CCNA: Switching, Routing, and Wireless Essentials",
-  "Cisco CCNA: Redes Empresariales, Seguridad y Automatizacion",
-  "Celonis Process Management Foundations",
-  "Gestion de Proyectos con Metodologias Agiles y Lean",
+  {
+    category: "Desarrollo",
+    items: [
+      {
+        name: "AWS Academy Cloud Foundations",
+        image: "/certifications/GestiónProyectosMetodologíasÁgilesYLean.png",
+      },
+      {
+        name: "IBM COBOL Programming with VSCode",
+        image: "/certifications/GestiónProyectosMetodologíasÁgilesYLean.png",
+      },
+      {
+        name: "Gestion de Proyectos con Metodologias Agiles y Lean",
+        image: "/certifications/GestiónProyectosMetodologíasÁgilesYLean.png",
+      },
+    ],
+  },
+
+  {
+    category: "Redes",
+    items: [
+      {
+        name: "Cisco CCNA: Introduction to Networks",
+        image: "/certifications/GestiónProyectosMetodologíasÁgilesYLean.png",
+      },
+      {
+        name: "Cisco CCNA: Switching, Routing, and Wireless Essentials",
+        image: "/certifications/GestiónProyectosMetodologíasÁgilesYLean.png",
+      },
+      {
+        name: "Cisco CCNA: Redes Empresariales, Seguridad y Automatizacion",
+        image: "/certifications/GestiónProyectosMetodologíasÁgilesYLean.png",
+      },
+    ],
+  },
+
+  {
+    category: "Procesos y Gestion",
+    items: [
+      {
+        name: "Celonis Process Management Foundations",
+        image: "/certifications/GestiónProyectosMetodologíasÁgilesYLean.png",
+      },
+    ],
+  },
 ];
 
 const skills = [
@@ -155,8 +193,7 @@ export default function AboutPage() {
                 <p className="eyebrow">Stack</p>
                 <h2>Competencias tecnicas</h2>
                 <p className="stack-note">
-                  Porcentaje aproximado segun presencia de codigo en tus repositorios
-                  publicos de GitHub.
+                  Segun mi codigo real en github
                 </p>
                 <div className="skill-list">
                   {skills.map((item) => (
@@ -178,32 +215,47 @@ export default function AboutPage() {
                   ))}
                 </div>
               </div>
-              <div>
-                <p className="eyebrow">Experiencia</p>
-                <h2>Soporte e infraestructura</h2>
-                <ul className="clean-list">
-                  {experience.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
             </section>
 
             <section className="about-section">
               <p className="eyebrow">Certificaciones</p>
               <h2>Formacion complementaria</h2>
-              <div className="tag-list">
-                {certifications.map((item) => (
-                  <span className="tag" key={item}>
-                    {item}
-                  </span>
+
+              <div className="certification-groups">
+                {certifications.map((group) => (
+                  <div className="certification-group" key={group.category}>
+
+                    <div className="certification-group-header">
+                      <h3>{group.category}</h3>
+                    </div>
+
+                    <div className="certification-flex">
+                      {group.items.map((item) => (
+                        <article className="cert-card" key={item.name}>
+                          <div className="cert-image-wrapper">
+                            <Image
+                              src={item.image}
+                              alt={item.name}
+                              width={320}
+                              height={180}
+                              className="cert-image"
+                            />
+                          </div>
+
+                          <div className="cert-content">
+                            <h4>{item.name}</h4>
+                          </div>
+                        </article>
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             </section>
 
             <section className="about-section">
               <p className="eyebrow">Timeline</p>
-              <h2>Evolucion</h2>
+              <h2>Evolución</h2>
 
               <div className="timeline-modern">
                 {timeline.map((item) => (

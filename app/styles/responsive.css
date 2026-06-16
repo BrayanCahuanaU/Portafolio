@@ -1,0 +1,134 @@
+@media (max-width: 860px) {
+  .hero-grid,
+  .split,
+  .two-columns,
+  .about-layout,
+  .about-grid,
+  .about-copy-grid,
+  .feature-grid,
+  .work-grid,
+  .device-section {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 64px 0;
+  }
+
+  h1 {
+    font-size: clamp(3rem, 16vw, 6rem);
+  }
+
+  .hero,
+  .hero.compact,
+  .device-section {
+    min-height: auto;
+  }
+
+  .device-section {
+    padding: 64px 16px;
+  }
+
+  .portrait-panel {
+    min-height: 360px;
+  }
+
+  .profile-column {
+    position: static;
+  }
+
+  .two-columns.flat {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .nav {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 0;
+  }
+
+  .nav-links {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .nav-links a {
+    white-space: nowrap;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .button {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .footer-inner {
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    color: var(--ink-muted);
+    font-size: 0.82rem;
+  }
+
+  .footer-socials {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: nowrap;
+  }
+
+  .footer-social-link {
+    width: 38px;
+    height: 38px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    transition:
+      transform 160ms ease,
+      border-color 160ms ease,
+      background 160ms ease;
+    flex-shrink: 0;
+  }
+
+  .footer-social-link:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .footer-social-link img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+  }
+
+  .timeline-item {
+    grid-template-columns: 56px 1fr;
+    gap: 16px;
+  }
+
+  .timeline-content {
+    padding: 18px;
+  }
+}

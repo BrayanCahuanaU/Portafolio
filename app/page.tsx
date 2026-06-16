@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { projects } from "./data/projects";
+import { getProjects } from "./data/projects";
 
-export default function Home() {
+export default async function Home() {
+  const projects = await getProjects();
   const featured = projects.slice(0, 3);
 
   return (

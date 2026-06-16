@@ -1,3 +1,6 @@
+import { fetchGitHubRepos, fetchReadme, fetchCommits, type Commit } from "../lib/github";
+import { enrichment, type GalleryItem } from "./projects-enrichment";
+
 export type Project = {
   slug: string;
   title: string;
@@ -7,8 +10,13 @@ export type Project = {
   period: string;
   duration: string;
   repository?: string;
+  homepage?: string;
   technologies: string[];
   outcomes: string[];
+  highlights: string[];
+  gallery: GalleryItem[];
+  commits: Commit[];
+  developmentPeriod: { start: string; end: string };
   results: {
     device: string;
     title: string;
@@ -17,120 +25,134 @@ export type Project = {
   }[];
 };
 
-export const projects: Project[] = [
-  {
-    slug: "vint",
-    title: "VINT",
-    category: "Startup web",
-    summary: "Proyecto web tipo startup construido con HTML, CSS y PHP.",
-    description:
-      "Repositorio orientado a una propuesta startup llamada VINT, desarrollado con herramientas web base y PHP para estructurar una experiencia funcional.",
-    period: "Proyecto academico",
-    duration: "Desarrollo web con enfoque practico",
-    repository: "https://github.com/BrayanCahuanaU/VINT",
-    technologies: ["HTML", "CSS", "PHP", "Git", "GitHub"],
-    outcomes: [
-      "Construccion de paginas web con estructura HTML y estilos CSS.",
-      "Uso de PHP para organizar logica de una aplicacion web inicial.",
-      "Versionado publico del codigo en GitHub.",
-    ],
-    results: [
-      {
-        device: "Escritorio",
-        title: "Presentacion amplia del producto",
-        detail:
-          "La interfaz permite mostrar secciones principales del proyecto con jerarquia clara para navegacion en pantalla grande.",
-        kind: "desktop",
-      },
-      {
-        device: "Tablet",
-        title: "Lectura por modulos",
-        detail:
-          "El contenido se organiza en bloques faciles de recorrer desde dispositivos intermedios.",
-        kind: "tablet",
-      },
-      {
-        device: "Movil",
-        title: "Flujo vertical",
-        detail:
-          "La experiencia prioriza contenido apilado y lectura rapida desde telefonos.",
-        kind: "mobile",
-      },
-    ],
+function formatDate(iso: string): string {
+  try {
+    const d = new Date(iso);
+    return d.toLocaleDateString("es-PE", { year: "numeric", month: "short", day: "numeric" });
+  } catch {
+    return iso;
+  }
+}
+
+function parseHighlightsFromReadme(readme: string): string[] {
+  const lines = readme.split("\n");
+  const highlights: string[] = [];
+
+  for (const line of lines) {
+    const trimmed = line.replace(/^[#*\s-]+/, "").trim();
+    if (
+      trimmed.length > 30 &&
+      !trimmed.startsWith("[") &&
+      !trimmed.startsWith("!") &&
+      !trimmed.startsWith("http")
+    ) {
+      highlights.push(trimmed);
+    }
+    if (highlights.length >= 5) break;
+  }
+
+  return highlights;
+}
+
+function buildProject(
+  repo: {
+    name: string;
+    description: string | null;
+    html_url: string;
+    topics: string[];
+    language: string | null;
+    homepage: string | null;
+    created_at: string;
+    pushed_at: string;
   },
-  {
-    slug: "fsi",
-    title: "FSI",
-    category: "Seguridad informatica",
-    summary: "Repositorio de practicas y laboratorios de fundamentos de seguridad informatica.",
-    description:
-      "Coleccion de actividades, ejercicios y laboratorios de seguridad informatica con material web y documentacion academica.",
-    period: "Proyecto academico",
-    duration: "Practicas y laboratorios por entregas",
-    repository: "https://github.com/BrayanCahuanaU/FSI",
-    technologies: ["PHP", "HTML", "CSS", "Documentacion tecnica", "GitHub"],
-    outcomes: [
-      "Organizacion de ejercicios y laboratorios por carpetas.",
-      "Aplicacion de conceptos de seguridad en ejemplos web.",
-      "Documentacion de practicas y evidencias del aprendizaje.",
-    ],
-    results: [
-      {
-        device: "Escritorio",
-        title: "Revision de laboratorios",
-        detail:
-          "Los archivos y ejercicios se pueden explorar con contexto completo desde una pantalla amplia.",
-        kind: "desktop",
-      },
-      {
-        device: "Tablet",
-        title: "Consulta academica",
-        detail: "La estructura del repositorio permite revisar material y avances por actividades.",
-        kind: "tablet",
-      },
-      {
-        device: "Movil",
-        title: "Acceso rapido",
-        detail: "Los contenidos principales quedan disponibles para revision puntual desde GitHub.",
-        kind: "mobile",
-      },
-    ],
-  },
-  {
-    slug: "lp-ii",
-    title: "LP-II",
-    category: "Programacion en Java",
-    summary: "Repositorio de Lenguaje de Programacion II con ejercicios desarrollados en Java.",
-    description:
-      "Practicas de programacion orientadas al dominio de Java, control de versiones y resolucion de ejercicios academicos.",
-    period: "Proyecto academico",
-    duration: "Ejercicios por laboratorio",
-    repository: "https://github.com/BrayanCahuanaU/LP-II",
-    technologies: ["Java", "Programacion orientada a objetos", "Git", "GitHub"],
-    outcomes: [
-      "Resolucion de ejercicios de programacion en Java.",
-      "Practica constante de estructuras, clases y logica aplicada.",
-      "Repositorio publico para seguimiento del aprendizaje.",
-    ],
-    results: [
-      {
-        device: "Escritorio",
-        title: "Lectura de codigo",
-        detail: "La vista amplia facilita analizar archivos, commits y estructura de ejercicios.",
-        kind: "desktop",
-      },
-      {
-        device: "Tablet",
-        title: "Seguimiento de practicas",
-        detail: "Los laboratorios se pueden revisar de forma ordenada durante el aprendizaje.",
-        kind: "tablet",
-      },
-      {
-        device: "Movil",
-        title: "Consulta rapida",
-        detail: "El repositorio permite ubicar ejercicios especificos desde dispositivos moviles.",
-        kind: "mobile",
-      },
-    ],
-  },
-];
+  readme: string | null,
+  commits: Commit[],
+): Project {
+  const enriched = enrichment[repo.name];
+  const slug = repo.name.toLowerCase().replace(/[^a-z0-9-]/g, "-");
+  const title = repo.name;
+
+  const languages = enriched?.technologies ?? [
+    ...repo.topics,
+    ...(repo.language ? [repo.language] : []),
+  ];
+
+  const highlights =
+    enriched?.highlights ??
+    (readme ? parseHighlightsFromReadme(readme) : []);
+
+  return {
+    slug,
+    title,
+    category: enriched?.category ?? "Proyecto",
+    summary: repo.description ?? enriched?.category ?? "Repositorio en GitHub",
+    description: repo.description ?? enriched?.category ?? "Repositorio en GitHub",
+    period: enriched?.period ?? "Proyecto",
+    duration: enriched?.duration ?? "",
+    repository: repo.html_url,
+    homepage: repo.homepage ?? undefined,
+    technologies: languages,
+    outcomes: enriched?.outcomes ?? [],
+    highlights,
+    gallery: enriched?.gallery ?? [],
+    commits,
+    developmentPeriod: {
+      start: formatDate(repo.created_at),
+      end: formatDate(repo.pushed_at),
+    },
+    results: enriched?.results ?? [],
+  };
+}
+
+function buildFromEnrichmentOnly(): Project[] {
+  return Object.entries(enrichment).map(([name, data]) => {
+    const slug = name.toLowerCase().replace(/[^a-z0-9-]/g, "-");
+    return {
+      slug,
+      title: name,
+      category: data.category ?? "Proyecto",
+      summary: data.outcomes?.[0] ?? "Repositorio en GitHub",
+      description: data.outcomes?.join(". ") ?? "Repositorio en GitHub",
+      period: data.period ?? "Proyecto",
+      duration: data.duration ?? "",
+      technologies: data.technologies ?? [],
+      outcomes: data.outcomes ?? [],
+      highlights: data.highlights ?? [],
+      gallery: data.gallery ?? [],
+      commits: [],
+      developmentPeriod: { start: "", end: "" },
+      results: data.results ?? [],
+    };
+  });
+}
+
+export async function getProjects(): Promise<Project[]> {
+  try {
+    const repos = await fetchGitHubRepos("BrayanCahuanaU");
+    if (repos.length === 0) {
+      return buildFromEnrichmentOnly();
+    }
+
+    const projects: Project[] = [];
+    const owner = "BrayanCahuanaU";
+
+    for (const repo of repos) {
+      let readme: string | null = null;
+      if (!enrichment[repo.name]?.highlights) {
+        readme = await fetchReadme(owner, repo.name).catch(() => null);
+      }
+      const commits = await fetchCommits(owner, repo.name);
+      projects.push(buildProject(repo, readme, commits));
+    }
+
+    return projects;
+  } catch {
+    console.warn("Failed to fetch GitHub repos. Using enrichment data only.");
+    return buildFromEnrichmentOnly();
+  }
+}
+
+export async function getProject(slug: string): Promise<Project | null> {
+  const projects = await getProjects();
+  return projects.find((p) => p.slug === slug) ?? null;
+}
